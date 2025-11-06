@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dash-Madhusmita/ecommerce_plants.git"
+    "url": "git+https://github.com/Dash-Madhusmita/plant-shop.git"
   },
   "author": "Madhusmita Dash",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Dash-Madhusmita/ecommerce_plants/issues"
+    "url": "https://github.com/Dash-Madhusmita/plant-shop/issues"
   },
-  "homepage": "https://github.com/Dash-Madhusmita/ecommerce_plants#readme",
+  "homepage": "https://github.com/Dash-Madhusmita/plant-shop#readme",
   "dependencies": {
     "express": "^5.1.0"
   }
