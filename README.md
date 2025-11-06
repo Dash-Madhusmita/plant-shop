@@ -1,11 +1,12 @@
 # 🌿 GreenLeaf - E-Commerce Plant Shop
 
-A full-stack MERN (MongoDB, Express, React, Node) application for buying and managing indoor and outdoor plants online.  
-Built for learning, portfolio presentation, and demonstrating scalable web app architecture.
+A full-stack **MERN (MongoDB, Express, React, Node)** application for buying and managing indoor and outdoor plants online.  
+Built for **learning**, **portfolio showcasing**, and demonstrating **scalable web architecture**.
 
 ---
 
 ## 📋 Table of Contents
+
 - [About](#-about)
 - [Tech Stack](#-tech-stack)
 - [Features](#-features)
@@ -17,33 +18,34 @@ Built for learning, portfolio presentation, and demonstrating scalable web app a
 - [System Design](#-system-design)
 - [Best Practices](#-best-practices)
 - [Future Improvements](#-future-improvements)
+- [Author](#-author)
 - [License](#-license)
 
 ---
 
 ## 🌱 About
 
-**GreenLeaf** is a responsive e-commerce web application where users can browse, search, and purchase plants.  
-The goal is to demonstrate **end-to-end full-stack development** using modern technologies and best practices.
+**GreenLeaf** is a modern e-commerce platform for selling and managing indoor & outdoor plants.  
+It’s a full-stack MERN project demonstrating real-world app architecture and clean code practices.
 
-**Key Objectives:**
-- Build RESTful APIs using Node.js & Express.
-- Manage data using MongoDB & Mongoose.
-- Create a responsive React frontend.
-- Implement authentication, authorization, and admin controls.
+**Goals:**
+- Learn REST API design using Express.js
+- Practice database modeling in MongoDB
+- Build a responsive React frontend
+- Implement JWT-based authentication and admin control
 
 ---
 
 ## ⚙️ Tech Stack
 
-### Frontend
+### **Frontend**
 - React.js
 - React Router
 - Axios
 - Tailwind CSS / Material UI
-- Redux Toolkit / Context API
+- Redux Toolkit or Context API
 
-### Backend
+### **Backend**
 - Node.js
 - Express.js
 - MongoDB + Mongoose
@@ -51,7 +53,7 @@ The goal is to demonstrate **end-to-end full-stack development** using modern te
 - bcrypt for password hashing
 - dotenv, express-validator, morgan
 
-### Tools
+### **Tools**
 - Postman (API Testing)
 - Git / GitHub
 - Nodemon (Development)
@@ -62,83 +64,78 @@ The goal is to demonstrate **end-to-end full-stack development** using modern te
 ## ✨ Features
 
 ### 👥 User
-- Register and log in using JWT authentication.
-- Browse all plants with filters and search.
-- Add plants to the shopping cart.
-- Place and view orders.
-- Write and view reviews.
+- Register and log in with JWT authentication
+- Browse plants and filter by type, light, or price
+- Add items to the cart and place orders
+- View order history
+- Leave reviews on plants
 
 ### 🧑‍🌾 Admin
-- Add, edit, or delete plant products.
-- Manage user accounts and orders.
-- Update stock levels and product visibility.
+- Manage users, products, and orders
+- Add, update, or delete plants
+- Manage inventory and stock
 
-### 🌿 Plants
-- Filter by type (Foliage, Flowering, Succulent, etc.).
-- Filter by light or watering requirement.
-- Sort by price or popularity.
+### 🌿 Plant Catalog
+- Filter by type (Foliage, Succulent, etc.)
+- Sort by price, popularity, or date added
+- View detailed plant descriptions
 
 ---
 
 ## 🗂️ Project Structure
 
+```bash
 plant-shop/
 │
 ├── server/
-│ ├── config/
-│ │ └── db.js
-│ ├── models/
-│ │ ├── Plant.js
-│ │ ├── User.js
-│ │ ├── Cart.js
-│ │ ├── Order.js
-│ │ └── Review.js
-│ ├── routes/
-│ │ ├── plantRoutes.js
-│ │ ├── userRoutes.js
-│ │ ├── cartRoutes.js
-│ │ ├── orderRoutes.js
-│ │ └── reviewRoutes.js
-│ ├── controllers/
-│ ├── middleware/
-│ ├── server.js
-│ └── package.json
+│   ├── config/
+│   │   └── db.js
+│   ├── models/
+│   │   ├── Plant.js
+│   │   ├── User.js
+│   │   ├── Cart.js
+│   │   ├── Order.js
+│   │   └── Review.js
+│   ├── routes/
+│   │   ├── plantRoutes.js
+│   │   ├── userRoutes.js
+│   │   ├── cartRoutes.js
+│   │   ├── orderRoutes.js
+│   │   └── reviewRoutes.js
+│   ├── controllers/
+│   ├── middleware/
+│   ├── server.js
+│   └── package.json
 │
 └── client/
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── context/ or redux/
-│ └── App.js
-└── package.json
-
-yaml
+    ├── src/
+    │   ├── components/
+    │   ├── pages/
+    │   ├── redux/ or context/
+    │   └── App.js
+    └── package.json
+🧾 Database Schemas
+🌿 Plant Schema (Plant.js)
+javascript
 Copy code
-
----
-
-## 🧾 Database Schemas
-
-### 🌿 Plant Schema (`Plant.js`)
-```javascript
-{
+const PlantSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: String,
   image: String,
   price: { type: Number, required: true },
   type: String,                 // Foliage, Succulent, Flowering, etc.
-  light: String,                // Bright, indirect, low light
+  light: String,                // Bright, indirect, or low light
   watering: String,             // Weekly, twice a week, etc.
   stock: { type: Number, default: 0 },
   rating: { type: Number, default: 0 },
   reviewsCount: { type: Number, default: 0 },
   isFeatured: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
-}
+});
 👤 User Schema (User.js)
 javascript
 Copy code
-{
+const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -146,11 +143,11 @@ Copy code
   phone: String,
   isAdmin: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
-}
+});
 🛒 Cart Schema (Cart.js)
 javascript
 Copy code
-{
+const CartSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   items: [
     {
@@ -160,16 +157,17 @@ Copy code
   ],
   totalPrice: Number,
   updatedAt: { type: Date, default: Date.now }
-}
+});
 📦 Order Schema (Order.js)
 javascript
 Copy code
-{
+const OrderSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   items: [
     {
       plantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Plant' },
-      quantity: Number
+      quantity: Number,
+      price: Number
     }
   ],
   totalAmount: Number,
@@ -177,38 +175,38 @@ Copy code
   address: String,
   paymentMethod: String,
   createdAt: { type: Date, default: Date.now }
-}
+});
 ⭐ Review Schema (Review.js)
 javascript
 Copy code
-{
+const ReviewSchema = new mongoose.Schema({
   plantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Plant' },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   rating: { type: Number, min: 1, max: 5 },
   comment: String,
   createdAt: { type: Date, default: Date.now }
-}
+});
 🔗 API Endpoints
 👤 User Routes
 Method	Endpoint	Description
 POST	/api/users/register	Register a new user
 POST	/api/users/login	Login and get JWT token
-GET	/api/users/profile	Get logged-in user details
+GET	/api/users/profile	Get logged-in user profile
 PUT	/api/users/profile	Update user profile
 
 🌿 Plant Routes
 Method	Endpoint	Description
 GET	/api/plants	Get all plants
-GET	/api/plants/:id	Get a specific plant
+GET	/api/plants/:id	Get a single plant by ID
 POST	/api/plants	Add a new plant (Admin only)
 PUT	/api/plants/:id	Update plant details (Admin only)
-DELETE	/api/plants/:id	Delete a plant (Admin only)
+DELETE	/api/plants/:id	Delete plant (Admin only)
 
 🛒 Cart Routes
 Method	Endpoint	Description
 POST	/api/cart/add	Add item to cart
-GET	/api/cart	Get current user's cart
-PUT	/api/cart/update/:itemId	Update cart item quantity
+GET	/api/cart	Get user's cart
+PUT	/api/cart/update/:itemId	Update item quantity
 DELETE	/api/cart/:itemId	Remove item from cart
 
 📦 Order Routes
@@ -216,13 +214,13 @@ Method	Endpoint	Description
 POST	/api/orders	Create new order
 GET	/api/orders/:id	Get order details
 GET	/api/orders/user/:userId	Get user’s order history
-PUT	/api/orders/:id/status	Update order status (Admin)
+PUT	/api/orders/:id/status	Update order status (Admin only)
 
 ⭐ Review Routes
 Method	Endpoint	Description
-POST	/api/reviews	Add a new review
+POST	/api/reviews	Add new review
 GET	/api/reviews/:plantId	Get all reviews for a plant
-DELETE	/api/reviews/:id	Delete a review (Admin or user)
+DELETE	/api/reviews/:id	Delete review (Admin or user)
 
 🧑‍💻 Installation & Setup
 1️⃣ Clone Repository
@@ -243,7 +241,7 @@ cd client
 npm install
 npm start
 🔐 Environment Variables
-Create a .env file in /server directory:
+Create a .env file inside the /server directory:
 
 ini
 Copy code
@@ -251,62 +249,66 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 🧠 System Design
-Architecture:
-Frontend (React) → API Layer (Express) → Database (MongoDB)
-
-Flow:
-
+Architecture
+scss
+Copy code
+Frontend (React) → REST API (Express) → MongoDB (Database)
+Data Flow
 User interacts with React UI.
 
-API requests sent via Axios to Express routes.
+API requests are sent via Axios to Express routes.
 
-Express controllers handle logic and talk to MongoDB using Mongoose.
+Express controllers handle business logic.
 
-JWT manages authentication.
+MongoDB stores and retrieves data.
 
-Responses are sent back to frontend for rendering.
+JWT handles authentication and authorization.
 
-Key Design Patterns:
-
+Design Patterns
 MVC (Model-View-Controller)
 
-Modular route/controller structure
+Modular routes & controllers
 
 Centralized error handling
 
 Middleware-based authentication
 
 🧩 Best Practices
-✅ Follow MVC structure
-✅ Use environment variables for secrets
-✅ Use bcrypt for password hashing
-✅ Implement JWT authentication
-✅ Validate all inputs using express-validator
-✅ Centralize error handling
-✅ Keep frontend & backend decoupled
-✅ Use pagination and filtering for product list
+✅ Use MVC structure
+
+✅ Secure credentials in .env
+
+✅ Hash passwords with bcrypt
+
+✅ Use JWT for authentication
+
+✅ Validate input using express-validator
+
+✅ Implement centralized error handling
+
+✅ Add pagination and search filters
+
 ✅ Handle CORS properly
 
+✅ Follow RESTful API design
+
 🚀 Future Improvements
-✅ Payment Gateway (Stripe or Razorpay)
+ Payment Gateway (Stripe / Razorpay)
 
-✅ Wishlist feature
+ Wishlist / Favorites
 
-✅ Admin dashboard with analytics
+ Admin dashboard with analytics
 
-✅ Product categories & tagging
+ Product tagging & category pages
 
-✅ Cloud storage for images (Cloudinary / AWS S3)
+ Cloud storage for images (Cloudinary / AWS S3)
 
-✅ Deployment with Docker or Render
+ Docker deployment
+
+ Email notifications for orders
 
 ✨ Author
 Your Name
 📧 your.email@example.com
 🔗 GitHub | LinkedIn
-
-
-
-
-
 
