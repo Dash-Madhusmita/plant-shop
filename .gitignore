@@ -1,0 +1,7 @@
+plant-shop-frontend/node_modules/
+ plant-shop-frontend/build/
+ .DS_Store
+
+plant-shop-backend/node_modules/
+
+plant-shop-backend/.env

@@ -1,0 +1,37 @@
+.footer {
+  background-color: #f8f8f8;
+  height: 80vh;
+  margin-top: 50px;
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 50px 0;
+  border-bottom: 1px solid lightgray;
+  background-color: rgba(11, 144, 11, 0.826);
+  height: 20vh;
+}
+
+.footer-input {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  width: 300px;
+  outline: none;
+}
+
+.footer-submit-button {
+  padding: 10px 20px;
+  background-color: #0b680e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
