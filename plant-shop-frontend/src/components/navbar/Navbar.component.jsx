@@ -1,8 +1,11 @@
 import "./Navbar.styles.css";
 import { Link } from "react-router-dom";
 import { Search, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
-function Navbar() {
+function Navbar({ isLoggedIn, userInfo }) {
+  const [selectedPage, setSelectedPage] = useState("home");
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -15,13 +18,28 @@ function Navbar() {
       </div>
 
       <div className="navbar-center">
-        <div className="nav-item">
+        <div
+          className={`${
+            selectedPage === "plant" ? "selected-nav-item" : "nav-item"
+          }`}
+          onClick={() => setSelectedPage("plant")}
+        >
           <Link to="/plants">Plant</Link>
         </div>
-        <div className="nav-item">
+        <div
+          className={`${
+            selectedPage === "caretips" ? "selected-nav-item" : "nav-item"
+          }`}
+          onClick={() => setSelectedPage("caretips")}
+        >
           <Link to="/caretips">Care Tips</Link>
         </div>
-        <div className="nav-item">
+        <div
+          className={`${
+            selectedPage === "about" ? "selected-nav-item" : "nav-item"
+          }`}
+          onClick={() => setSelectedPage("about")}
+        >
           <Link to="/about">About</Link>
         </div>
       </div>
@@ -40,12 +58,55 @@ function Navbar() {
             <ShoppingCart />
           </Link>
         </div>
-        <div className="nav-item">
-          <Link to="/login">Login</Link>
-        </div>
-        <div className="nav-item">
-          <Link to="/signup">Sign Up</Link>
-        </div>
+        {isLoggedIn && (
+          <div
+            className={`${
+              selectedPage === "admin-dashboard" ? "selected-nav-item" : "nav-item"
+            }`}
+            onClick={() => setSelectedPage("admin-dashboard")}
+          >
+            <Link to="/admin-dashboard">Admin</Link>
+          </div>
+        )}
+        {isLoggedIn ? (
+          <div className="nav-item user-greeting">
+            Hello, {userInfo && userInfo.name ? userInfo.name : "User"}
+          </div>
+        ) : null}
+        {isLoggedIn ? (
+          <div
+            className="nav-item user-greeting"
+            onClick={() => {
+              localStorage.removeItem("userInfo");
+              window.location.reload();
+            }}
+          >
+            Logout{" "}
+          </div>
+        ) : null}
+        {!isLoggedIn && (
+          <div
+            className={`${
+              selectedPage === "login" ? "selected-nav-item" : "nav-item"
+            }`}
+            onClick={() => setSelectedPage("login")}
+          >
+            <Link to="/login">Login</Link>
+          </div>
+        )}
+
+        {!isLoggedIn && (
+          <div
+            className={`${
+              selectedPage === "signup" ? "selected-nav-item" : "nav-item"
+            }`}
+            onClick={() => setSelectedPage("signup")}
+          >
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
+
+        
       </div>
     </nav>
   );

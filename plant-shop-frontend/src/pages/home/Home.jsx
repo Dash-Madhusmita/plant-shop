@@ -1,65 +1,30 @@
 import "./Home.css";
+import { useEffect, useState } from "react";
 import PlantA from "../../assets/PlantA.jpg";
 import { ShoppingCart, Star, Heart } from "lucide-react";
 import { PlantCard } from "../../components/plant-card/PlantCard";
 import Footer from "../../components/Footer/Footer";
+import axios from "axios";
 
 export default function Home() {
 
-// Example: src/data/mockPlants.js
-const mockPlants = [
-  {
-    id: 1,
-    name: "Monstera Deliciosa",
-    description: "A tropical plant with iconic split leaves, perfect for bright indoor spaces.",
-    image: "https://www.marthastewart.com/thmb/-5Nx4-_mbzpZFjOO81BfHtm-yqs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/monstera-deliciosa-or-swiss-cheese-plant-in-a-white-flower-pot-stands-on-a-white-wood-table-1333227721-3ea9525b85474fdda7b6857a248c7c2b.jpg",
-    price: 24.99,
-    type: "Foliage",
-    light: "Bright, indirect",
-    watering: "Weekly",
-  },
-  {
-    id: 2,
-    name: "Snake Plant",
-    description: "Low-maintenance and air-purifying, great for beginners.",
-    image: "https://mygreenscape.ca/cdn/shop/articles/image3_71ea6a70-45c4-4f0c-8369-4f18a10f4dd5.png?v=1732599548&width=1100",
-    price: 18.5,
-    type: "Succulent",
-    light: "Low to bright, indirect",
-    watering: "Every 2-3 weeks",
-  },
-  {
-    id: 3,
-    name: "Peace Lily",
-    description: "Elegant white blooms and lush leaves, thrives in low light.",
-    image: "https://havenplant.in/cdn/shop/files/qYNPupRnspGWPF4886Z7hB-Copy.jpg?v=1725372830&width=1946",
-    price: 21.0,
-    type: "Flowering",
-    light: "Low to medium",
-    watering: "Keep soil moist",
-  },
-  {
-    id: 4,
-    name: "Fiddle Leaf Fig",
-    description: "Trendy and bold, makes a statement in any room.",
-    image: "https://www.whiteflowerfarm.com/mas_assets/cache/image/a/8/1/0/43024.Jpg",
-    price: 34.99,
-    type: "Foliage",
-    light: "Bright, indirect",
-    watering: "Weekly",
-  },
-  {
-    id: 5,
-    name: "Aloe Vera",
-    description: "Healing succulent, easy to care for and drought-tolerant.",
-    image: "https://assets.clevelandclinic.org/transform/8b7ea676-b615-4449-bd7a-bf7982335121/aloe-vera-plant-1475314230",
-    price: 12.0,
-    type: "Succulent",
-    light: "Bright, direct",
-    watering: "Every 3 weeks",
-  },
-  
-];
+const [plantsData, setPlantsData] = useState([]);
+
+const getAllPlants = async () => {
+  try {
+    const response = await axios.get('http://localhost:3001/api/plant');
+    setPlantsData(response.data);
+    console.log('Plants data:', response);
+  } catch (error) {
+    console.error('Error fetching plants:', error);
+  }
+};
+
+
+useEffect(() => {
+  getAllPlants();
+}, []);
+
 
 
   return (
@@ -122,7 +87,7 @@ const mockPlants = [
       <div className="home-plant-section">
         <h2 className="home-subtitle">Featured Plants</h2>
         <div className="home-plant-list">
-          {mockPlants.map((plant)=>{
+          {plantsData.map((plant)=>{
             return <PlantCard key={plant.id} plant={plant} />
           })}
       </div>

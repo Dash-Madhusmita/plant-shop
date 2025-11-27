@@ -1,0 +1,12 @@
+.home-subdescription{
+    color:gray;
+    margin-left: 35px;
+}
+    
+.plant-filters{
+    margin-left: 35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
